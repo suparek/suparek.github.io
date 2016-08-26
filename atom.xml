@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-22T16:22:38.000Z</updated>
+  <updated>2016-08-26T18:19:24.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,41 +16,194 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>一个有关神之数字的小题</title>
+    <link href="http://yoursite.com/2016/08/27/newlist/"/>
+    <id>http://yoursite.com/2016/08/27/newlist/</id>
+    <published>2016-08-26T17:46:04.000Z</published>
+    <updated>2016-08-26T18:19:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="有这样一个题目："><a href="#有这样一个题目：" class="headerlink" title="有这样一个题目："></a>有这样一个题目：</h3><pre><code>12 + 92 = 82
+82 + 22 = 68
+62 + 82 = 100
+12 + 02 + 02 = 1
+</code></pre><a id="more"></a>
+<p>我们看到数字 19 经过上面的过程后结果为1，我们定义所有经历上述过程后结果为1的数字为“神之数字”，毫无疑问，19就是一个神之数字，现在请你设计一个程序，输入一个数字，判断它是否是“神之数字”。</p>
+<p>毫无疑问，有一手好代码功夫的人看到如上题目，恐怕都会嗤之以鼻，这算什么？看老夫给你解决它！然而当本小白看了两遍题目后还是一头雾水，这是要干什么？我的老老老老老师祖告诉过我们，要想多快好省地建设程序代码，现在就敲 键盘，但如果想好省多快地建设程序代码，现在应该拿笔在纸上写需求，虽然很啰嗦，我写需求。</p>
+<p>给定一个数字，将它的每一位都平方，然后加在一起，直至最后等于1，就是神数。</p>
+<p>需求分析完毕，我们设计算法，我们不妨想象一下，我们可以用递归或循环的方法，不断地解离一个数字，然后求平方和，假如平方和等于1，皆大欢喜，它就是神数，然而，如果它一直不等于1呢？我们又怎么判定它下一秒、甚至下一万秒也不会等于1呢？假如不能，岂不是要让它一直循环下去？</p>
+<p>这种可怕的情况当然不会出现，因为我们坚信宇宙是简单而又和谐的，不会出现这种情况（好盲目的信仰）。所以我们相信，这其中一定会有相应的数学规律，这也是我今天想说的：</p>
+<p>1.万物皆有其规律所在</p>
+<p>我们对一个数字进行解离，假如是15,第一次过程后结果为26，第二次过程后结果为40，第三次过程后结果为16，第四次过程后结果为37，第五次过程后结果为58，第六次为89，第七次为145，第八次为42，第九次为20，第十次为4，第十一次为16！</p>
+<p>这时，我们发现第十一次的结果与第三次的结果是一样的！假如再进行下去，也不过就是在第三次和第十一次之间徘徊而已，永远不会出现结果1，那么15就不会是神数，因为神数经最终为1，再经历过程还是为1，我们再度随机抽出几个数进行上述验证，结果皆为如此，这时，我们可以确定，假如一个数在经历过程中出现了重复结果，那它就不是神数，知道了这的数学规律，我们可以给出如下的代码：</p>
+<pre><code>int calcudouble(int n)//一次经历过程函数
+
+{
+
+ int t = 0;
+
+ int m = 0;
+
+ do{
+
+ m = n%10;
+
+ n = n/10;
+
+ t = t+m*m; 
+
+ }while((m != 0) || (n != 0));
+
+ return t;
+
+}
+
+int check_godnumber(int n) //判断神数的函数
+
+{
+
+        int arrayli[10000] = {0};
+
+int currentreu = calcudouble(n);
+
+ arrayli[currentreu] = 1;
+
+ while(1 != currentreu)
+
+ {
+
+ currentreu = calcudouble(currentreu);
+
+ if(arrayli[currentreu] == 0)
+
+ {
+
+ arrayli[currentreu] = 1;
+
+ }
+
+ else
+
+ {
+
+ break;
+
+ } 
+
+ }
+
+ if(currentreu == 1)
+
+ {
+
+ return 1;
+
+        }
+
+ else
+
+ {
+
+ return 0;
+
+ }
+
+ }
+</code></pre><p>整体的思想是：建立一个数组，数组的所有项全部初始化为0，输入一个数字，一次过程后结果为N，假如N不为1，则数组【N】赋值为1，之后每一次结果都重复如此，在赋值的同时，检查数组【N】是否早就为1，已经为1，表明出现了重复，此数不是神数！</p>
+<p>真是皆大欢喜，如果我们只是码农，我们就可以收工了，但是我是要成为码农王的男人！所以，我们还是看看是否有优化的余地吧。。。。</p>
+<p>我们发现，申请了一个1000的数组，然而在经历过程中我们只不过使用了其中的某几项，其他的大多数项根本没有用到，这好像有点浪费空间，而我们是不断过程到出现重复过程才能进行判断，这在时间上好像也有浪费，无数码农的经验告诉我们既浪费时间又浪费空间的算法往往不是好的算法，那么，是否还有更好的方法呢？</p>
+<p>2.寻找更简单的规律</p>
+<p>上次我们测试了15，发现它不是神数，我们继续测试一些数字，发现了另一条规律（有兴趣的可以自己发掘发掘，不再多写过程了）：每一个数的过程路径上必定会出现一个小于10的个位数，而我们测试了所有的个位数，假如不是1和7，就会出现重复，也就不是神数！</p>
+<p>原来如此，根据这个规律，我给出如下代码：</p>
+<pre><code>int check_gounumber(int n)
+
+{
+
+ int currentreu = calcudouble(n);
+
+ while(1 != currentreu)
+
+ {
+
+ currentreu = calcudouble(currentreu);
+
+ if(currentreu &lt; 10)
+
+ {
+
+ if(currentreu == 1)
+
+ {
+
+ return 1;
+
+ }
+
+ else
+
+ {
+
+ return 0;
+
+ }
+
+ } 
+
+ }
+
+ return 0;
+
+}
+</code></pre><p>相比之前的算法，该算法既节省了空间，又节省了时间，更加地自然而又简洁，让人喜悦。</p>
+<p>经过这次做题，我得出新的体会：在解决问题之前，先找准问题相关的规律，能够更加地事半功倍，而找到更好更简单的规律，则是迈向进步的开端。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;有这样一个题目：&quot;&gt;&lt;a href=&quot;#有这样一个题目：&quot; class=&quot;headerlink&quot; title=&quot;有这样一个题目：&quot;&gt;&lt;/a&gt;有这样一个题目：&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;12 + 92 = 82
+82 + 22 = 68
+62 + 82 = 100
+12 + 02 + 02 = 1
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+    
+      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
+  
+  <entry>
     <title>有关用three js描绘物体运动的轨迹</title>
-    <link href="http://yoursite.com/2016/08/23/%E6%9C%89%E5%85%B3%E7%94%A8three-js%E6%8F%8F%E7%BB%98%E7%89%A9%E4%BD%93%E8%BF%90%E5%8A%A8%E7%9A%84%E8%BD%A8%E8%BF%B9/"/>
-    <id>http://yoursite.com/2016/08/23/有关用three-js描绘物体运动的轨迹/</id>
+    <link href="http://yoursite.com/2016/08/23/min/"/>
+    <id>http://yoursite.com/2016/08/23/min/</id>
     <published>2016-08-22T16:13:27.000Z</published>
-    <updated>2016-08-22T16:22:38.000Z</updated>
+    <updated>2016-08-26T17:09:46.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>最近做了有关three js 建立3D视图的项目，所以进行一点总结。</p>
-<p>首先，我应当说明，这些项目是我不断看文档，看API，看例子，然后照猫画虎搞出来的，所以首先应当感谢的是three js的官网:<a href="http://thrrejs.org" target="_blank" rel="external">http://thrrejs.org</a></p>
+<p>首先，我应当说明，这些项目是我不断看文档，看API，看例子，然后照猫画虎搞出来的，所以首先应当感谢的是three js的官网:<a href="http://threejs.org" target="_blank" rel="external">http://threejs.org</a><br><a id="more"></a></p>
 <h2 id="不重复造轮子的原则是对的，但我们不应当失去造轮子的能力。"><a href="#不重复造轮子的原则是对的，但我们不应当失去造轮子的能力。" class="headerlink" title="不重复造轮子的原则是对的，但我们不应当失去造轮子的能力。"></a>不重复造轮子的原则是对的，但我们不应当失去造轮子的能力。</h2><p>在three js项目中，必须有如下几个元素：</p>
-<ul>
-<li><p>var scene = new THREE.Scene();//场景</p>
-</li>
-<li><p>var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );//视角</p>
-</li>
-<li><p>var renderer = new THREE.WebGLRenderer(); //渲染器</p>
-</li>
-<li><p>renderer.setSize( window.innerWidth, window.innerHeight ); 渲染器参数设置</p>
-</li>
-<li><p>document.body.appendChild( renderer.domElement );使渲染器在html网页中生效</p>
-</li>
-</ul>
-<p>这三种是使画面呈现出来最基本的要素，但仅仅只是有了白纸，眼睛，画笔，并不构成作品，我们需要在白纸上加点什么，以一个正方体为例。</p>
-<ul>
-<li><p>var geometry = new THREE.BoxGeometry( 1, 1, 1 ); 几何形状材质的决定</p>
-</li>
-<li><p>var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );外部纹理</p>
-</li>
-<li><p>var cube = new THREE.Mesh( geometry, material ); 构建一个正方体</p>
-</li>
-<li><p>scene.add( cube ); 将正方体加入场景中</p>
-</li>
-<li><p>camera.position.z = 5;决定正方体位置的z坐标、</p>
-</li>
-</ul>
-<p>注意：以上5条代码非常重要！！！所有对象的添加与绘制，都与上面的例子是差不多的模样。</p>
+<pre><code>var scene = new THREE.Scene();//场景
+
+var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );//视角
+
+var renderer = new THREE.WebGLRenderer(); //渲染器
+
+renderer.setSize( window.innerWidth, window.innerHeight ); 渲染器参数设置
+
+document.body.appendChild( renderer.domElement );使渲染器在html网页中生效
+</code></pre><p>这三种是使画面呈现出来最基本的要素，但仅仅只是有了白纸，眼睛，画笔，并不构成作品，我们需要在白纸上加点什么，以一个正方体为例。</p>
+<pre><code>var geometry = new THREE.BoxGeometry( 1, 1, 1 ); 几何形状材质的决定
+
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );外部纹理
+
+var cube = new THREE.Mesh( geometry, material ); 构建一个正方体
+
+scene.add( cube ); 将正方体加入场景中
+
+camera.position.z = 5;决定正方体位置的z坐标、
+</code></pre><p>注意：以上5条代码非常重要！！！所有对象的添加与绘制，都与上面的例子是差不多的模样。</p>
 <p>几乎所有的动画效果与上方例子不同的地方仅在于：</p>
 <p>几何形状不同或依某个函数变化；</p>
 <p>外部纹理不同或依某个函数变化；</p>
@@ -58,17 +211,14 @@
 <p>位置不同或依某个函数变化；</p>
 <p>所以上方正方体的例子就是动画最原始的模样！</p>
 <p>当你画完了，需要让它们动起来的时候，就需要如下的函数：</p>
-<ul>
-<li><p>function render() {</p>
-</li>
-<li><p>requestAnimationFrame( render ); 不断地执行一个叫“render”的函数，等于无限调用自己</p>
-</li>
-<li><p>renderer.render( scene, camera );渲染器启动，渲染场景与视角</p>
-</li>
-<li><p>}</p>
-</li>
-</ul>
-<p>render();开始无限调用</p>
+<pre><code>function render() {
+
+requestAnimationFrame( render ); 不断地执行一个叫“render”的函数，等于无限调用自己
+
+renderer.render( scene, camera );渲染器启动，渲染场景与视角
+
+}
+</code></pre><p>render();开始无限调用</p>
 <p>渲染器运行函数通过不断地调用自己，使得动画一直存在，假如你把那个无限调用干掉的话，动画将是昙花一现。</p>
 <p>我将述说一个需求：使一个物体（假设是小球）不断地运动，并且显示它运动的轨迹。</p>
 <p>我愿意告诉你们我最终的想法与做法：</p>
@@ -78,40 +228,36 @@
 <p>【3】必须建立“线”这一对象，用以描绘运动轨迹。</p>
 <p>【4】有关线的建立：</p>
 <p>由于是绘制轨迹，应当尽可能地准确而平滑，假如我们直接使用“线”结构，最终只能搞出一堆直线的连接，而three js中有样条曲线的结构（有很多种曲线结构，感兴趣地可以试试别的），使用样条曲线能构造出平滑的曲线，例子如下：</p>
-<ul>
-<li><p>var curve = new THREE.SplineCurve3(</p>
-</li>
-<li><p>[new THREE.Vector3( -10, 0, 10 ),
-　</p>
-</li>
-<li>new THREE.Vector3( -5, 5, 5 ),
-　</li>
-<li>new THREE.Vector3( 0, 0, 0 ),
-　</li>
-<li>new THREE.Vector3( 5, -5, 5 ), //设置线经过的坐标
-　</li>
-<li>new THREE.Vector3( 10, 0, 10 ) ]</li>
-</ul>
-<p>);</p>
-<ul>
-<li><p>var path = new THREE.Path( curve.getPoints( 50 ) ); 决定画线的精度，学过微积分的都知道，这就是不断趋近</p>
-</li>
-<li><p>var geometry = path.createPointsGeometry( 50 ); 将坐标数组包装入几何性质中</p>
-</li>
-<li><p>var material = new THREE.LineBasicMaterial( { color : 0xff0000 } ); 纹理，（这里设置的是颜色）</p>
-</li>
-<li><p>var splineObject = new THREE.Line( geometry, material );//画线</p>
-</li>
-<li><p>scene.add( splineObject );将对象加入场景</p>
-</li>
-</ul>
-<p>而当我们将变化的小球坐标不断加入到数组中，再依照上面的方法，自然而然地就画出了小球的轨迹。</p>
+<pre><code>var curve = new THREE.SplineCurve3(
+
+[new THREE.Vector3( -10, 0, 10 ),
+
+new THREE.Vector3( -5, 5, 5 ),
+
+new THREE.Vector3( 0, 0, 0 ),
+
+new THREE.Vector3( 5, -5, 5 ), //设置线经过的坐标
+
+new THREE.Vector3( 10, 0, 10 ) ]
+
+);
+
+var path = new THREE.Path( curve.getPoints( 50 ) ); 决定画线的精度，学过微积分的都知道，这就是不断趋近
+
+var geometry = path.createPointsGeometry( 50 ); 将坐标数组包装入几何性质中
+
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } ); 纹理，（这里设置的是颜色）
+
+var splineObject = new THREE.Line( geometry, material );//画线
+
+scene.add( splineObject );将对象加入场景
+</code></pre><p>而当我们将变化的小球坐标不断加入到数组中，再依照上面的方法，自然而然地就画出了小球的轨迹。</p>
 ]]></content>
     
     <summary type="html">
     
       &lt;h3 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot; class=&quot;headerlink&quot; title=&quot;摘要&quot;&gt;&lt;/a&gt;摘要&lt;/h3&gt;&lt;p&gt;最近做了有关three js 建立3D视图的项目，所以进行一点总结。&lt;/p&gt;
-&lt;p&gt;首先，我应当说明，这些项目是我不断看文档，看API，看例
+&lt;p&gt;首先，我应当说明，这些项目是我不断看文档，看API，看例子，然后照猫画虎搞出来的，所以首先应当感谢的是three js的官网:&lt;a href=&quot;http://threejs.org&quot;&gt;http://threejs.org&lt;/a&gt;&lt;br&gt;
     
     </summary>
     
@@ -125,7 +271,7 @@
     <link href="http://yoursite.com/2016/08/22/first-post/"/>
     <id>http://yoursite.com/2016/08/22/first-post/</id>
     <published>2016-08-22T15:21:09.000Z</published>
-    <updated>2016-08-22T16:10:58.000Z</updated>
+    <updated>2016-08-26T17:09:20.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="博客从此处开始"><a href="#博客从此处开始" class="headerlink" title="博客从此处开始"></a>博客从此处开始</h3><p>哎！我的博客就这样开通了，也没什么话可说，如果你喜欢的话，就常来逛逛吧，不止有技术方面的事哦！</p>
 ]]></content>
@@ -146,7 +292,7 @@
     <link href="http://yoursite.com/2016/08/22/hello-world/"/>
     <id>http://yoursite.com/2016/08/22/hello-world/</id>
     <published>2016-08-22T14:41:31.590Z</published>
-    <updated>2016-08-22T14:41:32.000Z</updated>
+    <updated>2016-08-26T17:26:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>

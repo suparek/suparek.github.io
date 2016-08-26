@@ -1,1 +1,372 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 杨涛的个人博客</title><meta name="description" content="suparek's blog|technology|code"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/real.jpg"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="杨涛的个人博客"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/real.jpg"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link active">博文</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">文章列表</a></li><li class="nav-list-item"><a href="http://weibo.com/u/5907252227?refer_flag=1001030102_&amp;is_all=1" target="_blank" class="nav-list-link">微博</a></li><li class="nav-list-item"><a href="https://github.com/suparek" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/08/23/有关用three-js描绘物体运动的轨迹/" class="post-title-link">有关用three js描绘物体运动的轨迹</a></h2><div class="post-info">2016年8月23日</div><div class="post-content"></div><a href="/2016/08/23/有关用three-js描绘物体运动的轨迹/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/08/22/first-post/" class="post-title-link">这是我的第一篇博文</a></h2><div class="post-info">2016年8月22日</div><div class="post-content"></div><a href="/2016/08/22/first-post/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/08/22/hello-world/" class="post-title-link">Hello World</a></h2><div class="post-info">2016年8月22日</div><div class="post-content"></div><a href="/2016/08/22/hello-world/" class="read-more">...阅读全文</a></article></li></ul></section><footer><div class="paginator"></div><div class="copyright"><p>© 2016 <a href="http://yoursite.com">杨涛</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=44218032" charset="UTF-8"></script>
+  <script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?7192fa361f5cabb11d8a22de41c1ba8f";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+  
+  <title>杨涛的个人博客</title>
+  <meta name="author" content="杨涛">
+  
+  <meta name="description" content="suparek&#39;s blog|technology|code">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="杨涛的个人博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/imgs/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="杨涛的个人博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header><div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/imgs/logo.png" alt="杨涛的个人博客" title="杨涛的个人博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name">杨涛的个人博客</h1>
+				<h2 class="blog-motto">代码种子，程序小白</h2>
+			</div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">博文列表</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li> <a href="/atom.xml">RSS</a> </li>
+				</ul>
+			</nav>			
+</div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <time datetime="2016-08-26T17:46:04.000Z"><a href="/2016/08/27/newlist/">2016-08-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/08/27/newlist/">一个有关神之数字的小题</a></h1>
+  
+
+    </header>
+    <div class="entry">
+		<h3 id="有这样一个题目："><a href="#有这样一个题目：" class="headerlink" title="有这样一个题目："></a>有这样一个题目：</h3><pre><code>12 + 92 = 82
+82 + 22 = 68
+62 + 82 = 100
+12 + 02 + 02 = 1
+</code></pre> 
+    </div>
+    <footer>
+		<div class="alignleft">
+		<a href="/2016/08/27/newlist/#more" class="more-link">Read more</a>
+		</div>
+		
+		<div class="comments-count">
+			
+			<a href="/2016/08/27/newlist/#comment" class="ds-thread-count icon-comment" data-thread-key="2016/08/27/newlist/" data-count-type="comments"></a>
+			
+		</div>
+		
+        <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <time datetime="2016-08-22T16:13:27.000Z"><a href="/2016/08/23/min/">2016-08-23</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/08/23/min/">有关用three js描绘物体运动的轨迹</a></h1>
+  
+
+    </header>
+    <div class="entry">
+		<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>最近做了有关three js 建立3D视图的项目，所以进行一点总结。</p>
+<p>首先，我应当说明，这些项目是我不断看文档，看API，看例子，然后照猫画虎搞出来的，所以首先应当感谢的是three js的官网:<a href="http://threejs.org">http://threejs.org</a><br> 
+    </div>
+    <footer>
+		<div class="alignleft">
+		<a href="/2016/08/23/min/#more" class="more-link">Read more</a>
+		</div>
+		
+		<div class="comments-count">
+			
+			<a href="/2016/08/23/min/#comment" class="ds-thread-count icon-comment" data-thread-key="2016/08/23/min/" data-count-type="comments"></a>
+			
+		</div>
+		
+        <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <time datetime="2016-08-22T15:21:09.000Z"><a href="/2016/08/22/first-post/">2016-08-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/08/22/first-post/">这是我的第一篇博文</a></h1>
+  
+
+    </header>
+    <div class="entry">
+		 
+    </div>
+    <footer>
+		<div class="alignleft">
+		<a href="/2016/08/22/first-post/#more" class="more-link">Read more</a>
+		</div>
+		
+		<div class="comments-count">
+			
+			<a href="/2016/08/22/first-post/#comment" class="ds-thread-count icon-comment" data-thread-key="2016/08/22/first-post/" data-count-type="comments"></a>
+			
+		</div>
+		
+        <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <time datetime="2016-08-22T14:41:31.590Z"><a href="/2016/08/22/hello-world/">2016-08-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/08/22/hello-world/">Hello World</a></h1>
+  
+
+    </header>
+    <div class="entry">
+		 
+    </div>
+    <footer>
+		<div class="alignleft">
+		<a href="/2016/08/22/hello-world/#more" class="more-link">Read more</a>
+		</div>
+		
+		<div class="comments-count">
+			
+			<a href="/2016/08/22/hello-world/#comment" class="ds-thread-count icon-comment" data-thread-key="2016/08/22/hello-world/" data-count-type="comments"></a>
+			
+		</div>
+		
+        <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/前端，js/" style="font-size: 10px;">前端，js</a> <a href="/tags/博客，文章/" style="font-size: 10px;">博客，文章</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a>
+  </div>
+</div>
+
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=0&speed=0&skin=8&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=5907252227&verifier=db94e5c8&dpc=1"></iframe>
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://opiece.me" title="Chillax's Blog" target="_blank">Chillax</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 时感春去芳菲尽 <br/>
+			哪知秋来白发生</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/5907252227" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/suparek" target="_blank" title="github"></a>
+		
+		
+		<a href="https://www.facebook.com/yangtao" target="_blank" title="facebook"></a>
+		
+		
+		
+		<a href="mailto:YTkks001@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/huangjunhui/concise" target="_blank" title="Concise">Concise</a> © 2016 
+		
+		<a href="http://yoursite.com/about" target="_blank" title="杨涛">杨涛</a>
+		
+		</p>
+</div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/counter.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<div id="totop" style="position:fixed;bottom:100px;right:10px;cursor: pointer;">
+<a title="返回顶部"><img src="/imgs/scrollup.png"/></a>
+</div>
+<script src="/js/totop.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+
+

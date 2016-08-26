@@ -15,7 +15,7 @@
 	})();
 	</script>
   
-  <title>Hello World | 杨涛的个人博客</title>
+  <title>一个有关神之数字的小题 | 杨涛的个人博客</title>
   <meta name="author" content="杨涛">
   
   <meta name="description" content="suparek&#39;s blog|technology|code">
@@ -23,7 +23,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Hello World"/>
+  <meta property="og:title" content="一个有关神之数字的小题"/>
   <meta property="og:site_name" content="杨涛的个人博客"/>
 
   
@@ -81,34 +81,163 @@
   <div class="post-content">
     <header class="article-info clearfix">
   <h1 itemprop="name">
-	Hello World
+	一个有关神之数字的小题
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="杨涛">杨涛</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-08-22T14:41:31.590Z" itemprop="datePublished">2016-08-22</time>
-    Update date:<time datetime="2016-08-26T17:26:34.000Z" itemprop="dateModified">2016-08-27</time>
+    <time datetime="2016-08-26T17:46:04.000Z" itemprop="datePublished">2016-08-27</time>
+    Update date:<time datetime="2016-08-26T18:19:24.000Z" itemprop="dateModified">2016-08-27</time>
     
   </p>
 </header>
     <div class="entry">
 		
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h3 id="有这样一个题目："><a href="#有这样一个题目：" class="headerlink" title="有这样一个题目："></a>有这样一个题目：</h3><pre><code>12 + 92 = 82
+82 + 22 = 68
+62 + 82 = 100
+12 + 02 + 02 = 1
+</code></pre><a id="more"></a>
+<p>我们看到数字 19 经过上面的过程后结果为1，我们定义所有经历上述过程后结果为1的数字为“神之数字”，毫无疑问，19就是一个神之数字，现在请你设计一个程序，输入一个数字，判断它是否是“神之数字”。</p>
+<p>毫无疑问，有一手好代码功夫的人看到如上题目，恐怕都会嗤之以鼻，这算什么？看老夫给你解决它！然而当本小白看了两遍题目后还是一头雾水，这是要干什么？我的老老老老老师祖告诉过我们，要想多快好省地建设程序代码，现在就敲 键盘，但如果想好省多快地建设程序代码，现在应该拿笔在纸上写需求，虽然很啰嗦，我写需求。</p>
+<p>给定一个数字，将它的每一位都平方，然后加在一起，直至最后等于1，就是神数。</p>
+<p>需求分析完毕，我们设计算法，我们不妨想象一下，我们可以用递归或循环的方法，不断地解离一个数字，然后求平方和，假如平方和等于1，皆大欢喜，它就是神数，然而，如果它一直不等于1呢？我们又怎么判定它下一秒、甚至下一万秒也不会等于1呢？假如不能，岂不是要让它一直循环下去？</p>
+<p>这种可怕的情况当然不会出现，因为我们坚信宇宙是简单而又和谐的，不会出现这种情况（好盲目的信仰）。所以我们相信，这其中一定会有相应的数学规律，这也是我今天想说的：</p>
+<p>1.万物皆有其规律所在</p>
+<p>我们对一个数字进行解离，假如是15,第一次过程后结果为26，第二次过程后结果为40，第三次过程后结果为16，第四次过程后结果为37，第五次过程后结果为58，第六次为89，第七次为145，第八次为42，第九次为20，第十次为4，第十一次为16！</p>
+<p>这时，我们发现第十一次的结果与第三次的结果是一样的！假如再进行下去，也不过就是在第三次和第十一次之间徘徊而已，永远不会出现结果1，那么15就不会是神数，因为神数经最终为1，再经历过程还是为1，我们再度随机抽出几个数进行上述验证，结果皆为如此，这时，我们可以确定，假如一个数在经历过程中出现了重复结果，那它就不是神数，知道了这的数学规律，我们可以给出如下的代码：</p>
+<pre><code>int calcudouble(int n)//一次经历过程函数
+
+{
+
+ int t = 0;
+
+ int m = 0;
+
+ do{
+
+ m = n%10;
+
+ n = n/10;
+
+ t = t+m*m; 
+
+ }while((m != 0) || (n != 0));
+
+ return t;
+
+}
+
+int check_godnumber(int n) //判断神数的函数
+
+{
+
+        int arrayli[10000] = {0};
+
+int currentreu = calcudouble(n);
+
+ arrayli[currentreu] = 1;
+
+ while(1 != currentreu)
+
+ {
+
+ currentreu = calcudouble(currentreu);
+
+ if(arrayli[currentreu] == 0)
+
+ {
+
+ arrayli[currentreu] = 1;
+
+ }
+
+ else
+
+ {
+
+ break;
+
+ } 
+
+ }
+
+ if(currentreu == 1)
+
+ {
+
+ return 1;
+
+        }
+
+ else
+
+ {
+
+ return 0;
+
+ }
+
+ }
+</code></pre><p>整体的思想是：建立一个数组，数组的所有项全部初始化为0，输入一个数字，一次过程后结果为N，假如N不为1，则数组【N】赋值为1，之后每一次结果都重复如此，在赋值的同时，检查数组【N】是否早就为1，已经为1，表明出现了重复，此数不是神数！</p>
+<p>真是皆大欢喜，如果我们只是码农，我们就可以收工了，但是我是要成为码农王的男人！所以，我们还是看看是否有优化的余地吧。。。。</p>
+<p>我们发现，申请了一个1000的数组，然而在经历过程中我们只不过使用了其中的某几项，其他的大多数项根本没有用到，这好像有点浪费空间，而我们是不断过程到出现重复过程才能进行判断，这在时间上好像也有浪费，无数码农的经验告诉我们既浪费时间又浪费空间的算法往往不是好的算法，那么，是否还有更好的方法呢？</p>
+<p>2.寻找更简单的规律</p>
+<p>上次我们测试了15，发现它不是神数，我们继续测试一些数字，发现了另一条规律（有兴趣的可以自己发掘发掘，不再多写过程了）：每一个数的过程路径上必定会出现一个小于10的个位数，而我们测试了所有的个位数，假如不是1和7，就会出现重复，也就不是神数！</p>
+<p>原来如此，根据这个规律，我给出如下代码：</p>
+<pre><code>int check_gounumber(int n)
+
+{
+
+ int currentreu = calcudouble(n);
+
+ while(1 != currentreu)
+
+ {
+
+ currentreu = calcudouble(currentreu);
+
+ if(currentreu &lt; 10)
+
+ {
+
+ if(currentreu == 1)
+
+ {
+
+ return 1;
+
+ }
+
+ else
+
+ {
+
+ return 0;
+
+ }
+
+ } 
+
+ }
+
+ return 0;
+
+}
+</code></pre><p>相比之前的算法，该算法既节省了空间，又节省了时间，更加地自然而又简洁，让人喜悦。</p>
+<p>经过这次做题，我得出新的体会：在解决问题之前，先找准问题相关的规律，能够更加地事半功倍，而找到更好更简单的规律，则是迈向进步的开端。</p>
 
     </div>
     <footer>
         
         
+  
+  <div class="tags">
+    <a href="/tags/数学/">数学</a>, <a href="/tags/C语言/">C语言</a>
+  </div>
+
 		<div class="bdsharebuttonbox">
 	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
 	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
@@ -154,8 +283,8 @@ with(document)0[
 
  <nav id="pagination" >
     
-    <a href="/2016/08/22/first-post/" class="alignleft prev" title="这是我的第一篇博文">这是我的第一篇博文</a>
     
+    <a href="/2016/08/23/min/" class="alignright next" title="有关用three js描绘物体运动的轨迹">有关用three js描绘物体运动的轨迹</a>
     
     <div class="clearfix"></div>
 </nav>

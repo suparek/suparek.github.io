@@ -15,7 +15,7 @@
 	})();
 	</script>
   
-  <title>Hello World | 杨涛的个人博客</title>
+  <title>有关用three js描绘物体运动的轨迹 | 杨涛的个人博客</title>
   <meta name="author" content="杨涛">
   
   <meta name="description" content="suparek&#39;s blog|technology|code">
@@ -23,7 +23,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Hello World"/>
+  <meta property="og:title" content="有关用three js描绘物体运动的轨迹"/>
   <meta property="og:site_name" content="杨涛的个人博客"/>
 
   
@@ -81,34 +81,101 @@
   <div class="post-content">
     <header class="article-info clearfix">
   <h1 itemprop="name">
-	Hello World
+	有关用three js描绘物体运动的轨迹
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="杨涛">杨涛</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-08-22T14:41:31.590Z" itemprop="datePublished">2016-08-22</time>
-    Update date:<time datetime="2016-08-26T17:26:34.000Z" itemprop="dateModified">2016-08-27</time>
+    <time datetime="2016-08-22T16:13:27.000Z" itemprop="datePublished">2016-08-23</time>
+    Update date:<time datetime="2016-08-26T17:09:46.000Z" itemprop="dateModified">2016-08-27</time>
     
   </p>
 </header>
     <div class="entry">
 		
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>最近做了有关three js 建立3D视图的项目，所以进行一点总结。</p>
+<p>首先，我应当说明，这些项目是我不断看文档，看API，看例子，然后照猫画虎搞出来的，所以首先应当感谢的是three js的官网:<a href="http://threejs.org" target="_blank" rel="external">http://threejs.org</a><br><a id="more"></a></p>
+<h2 id="不重复造轮子的原则是对的，但我们不应当失去造轮子的能力。"><a href="#不重复造轮子的原则是对的，但我们不应当失去造轮子的能力。" class="headerlink" title="不重复造轮子的原则是对的，但我们不应当失去造轮子的能力。"></a>不重复造轮子的原则是对的，但我们不应当失去造轮子的能力。</h2><p>在three js项目中，必须有如下几个元素：</p>
+<pre><code>var scene = new THREE.Scene();//场景
+
+var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );//视角
+
+var renderer = new THREE.WebGLRenderer(); //渲染器
+
+renderer.setSize( window.innerWidth, window.innerHeight ); 渲染器参数设置
+
+document.body.appendChild( renderer.domElement );使渲染器在html网页中生效
+</code></pre><p>这三种是使画面呈现出来最基本的要素，但仅仅只是有了白纸，眼睛，画笔，并不构成作品，我们需要在白纸上加点什么，以一个正方体为例。</p>
+<pre><code>var geometry = new THREE.BoxGeometry( 1, 1, 1 ); 几何形状材质的决定
+
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );外部纹理
+
+var cube = new THREE.Mesh( geometry, material ); 构建一个正方体
+
+scene.add( cube ); 将正方体加入场景中
+
+camera.position.z = 5;决定正方体位置的z坐标、
+</code></pre><p>注意：以上5条代码非常重要！！！所有对象的添加与绘制，都与上面的例子是差不多的模样。</p>
+<p>几乎所有的动画效果与上方例子不同的地方仅在于：</p>
+<p>几何形状不同或依某个函数变化；</p>
+<p>外部纹理不同或依某个函数变化；</p>
+<p>构建的时机与加入场景的时机不同或依某个函数变化；</p>
+<p>位置不同或依某个函数变化；</p>
+<p>所以上方正方体的例子就是动画最原始的模样！</p>
+<p>当你画完了，需要让它们动起来的时候，就需要如下的函数：</p>
+<pre><code>function render() {
+
+requestAnimationFrame( render ); 不断地执行一个叫“render”的函数，等于无限调用自己
+
+renderer.render( scene, camera );渲染器启动，渲染场景与视角
+
+}
+</code></pre><p>render();开始无限调用</p>
+<p>渲染器运行函数通过不断地调用自己，使得动画一直存在，假如你把那个无限调用干掉的话，动画将是昙花一现。</p>
+<p>我将述说一个需求：使一个物体（假设是小球）不断地运动，并且显示它运动的轨迹。</p>
+<p>我愿意告诉你们我最终的想法与做法：</p>
+<p>像上方一样，建立三要素，建立一个小球，</p>
+<p>【1】使它的position位置的三个坐标都加上一个 -10~10之间的随机数，（发挥你的数学才能让球按一定规律运动）</p>
+<p>【2】步骤【1】要在render函数中实现，这样能够使小球不断地运动。（因为每次渲染小球的坐标都在变）</p>
+<p>【3】必须建立“线”这一对象，用以描绘运动轨迹。</p>
+<p>【4】有关线的建立：</p>
+<p>由于是绘制轨迹，应当尽可能地准确而平滑，假如我们直接使用“线”结构，最终只能搞出一堆直线的连接，而three js中有样条曲线的结构（有很多种曲线结构，感兴趣地可以试试别的），使用样条曲线能构造出平滑的曲线，例子如下：</p>
+<pre><code>var curve = new THREE.SplineCurve3(
+
+[new THREE.Vector3( -10, 0, 10 ),
+
+new THREE.Vector3( -5, 5, 5 ),
+
+new THREE.Vector3( 0, 0, 0 ),
+
+new THREE.Vector3( 5, -5, 5 ), //设置线经过的坐标
+
+new THREE.Vector3( 10, 0, 10 ) ]
+
+);
+
+var path = new THREE.Path( curve.getPoints( 50 ) ); 决定画线的精度，学过微积分的都知道，这就是不断趋近
+
+var geometry = path.createPointsGeometry( 50 ); 将坐标数组包装入几何性质中
+
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } ); 纹理，（这里设置的是颜色）
+
+var splineObject = new THREE.Line( geometry, material );//画线
+
+scene.add( splineObject );将对象加入场景
+</code></pre><p>而当我们将变化的小球坐标不断加入到数组中，再依照上面的方法，自然而然地就画出了小球的轨迹。</p>
 
     </div>
     <footer>
         
         
+  
+  <div class="tags">
+    <a href="/tags/前端，js/">前端，js</a>
+  </div>
+
 		<div class="bdsharebuttonbox">
 	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
 	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
@@ -154,8 +221,10 @@ with(document)0[
 
  <nav id="pagination" >
     
-    <a href="/2016/08/22/first-post/" class="alignleft prev" title="这是我的第一篇博文">这是我的第一篇博文</a>
+    <a href="/2016/08/27/newlist/" class="alignleft prev" title="一个有关神之数字的小题">一个有关神之数字的小题</a>
     
+    
+    <a href="/2016/08/22/first-post/" class="alignright next" title="这是我的第一篇博文">这是我的第一篇博文</a>
     
     <div class="clearfix"></div>
 </nav>
